@@ -25,3 +25,7 @@ proguard/
 
 # Log Files
 *.log
+
+# intellij project setup
+*.iml
+.idea

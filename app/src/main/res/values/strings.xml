@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PuzzleAndDragonNotifier</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="id_editor_hint">Please enter your user id.</string>
+    <string name="id_save_button_text">Proceed</string>
 </resources>

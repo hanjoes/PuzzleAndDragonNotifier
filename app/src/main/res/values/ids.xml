@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name = "id_save_button" type="id" />
-    <item name = "id_editor" type="id" />
+    <item name="info_save_button" type="id" />
+    <item name="id_editor" type="id" />
+    <item name="name_editor" type="id" />
+    <item name="name_save_button" type="id" />
+    <item name="info_update_button" type="id" />
 </resources>

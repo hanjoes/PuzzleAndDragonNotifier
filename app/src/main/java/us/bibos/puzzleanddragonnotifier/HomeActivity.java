@@ -1,9 +1,19 @@
 package us.bibos.puzzleanddragonnotifier;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import us.bibos.puzzleanddragonnotifier.DBContract.Model.InsertDBModel;
+import us.bibos.puzzleanddragonnotifier.DBContract.UserInfoContract.UserInfo;
+import us.bibos.puzzleanddragonnotifier.DBHelper.UserInfoSQLiteHelper;
+import us.bibos.puzzleanddragonnotifier.Tasks.DBInsertAsyncTask;
 
 public class HomeActivity extends ActionBarActivity {
 
@@ -11,6 +21,7 @@ public class HomeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initialize();
     }
 
     @Override
@@ -33,5 +44,53 @@ public class HomeActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void idSaveButtonClicked(View view) {
+        Context context = getApplicationContext();
+        EditText idEditor = (EditText) findViewById(R.id.id_editor);
+        String id = idEditor.getText().toString();
+        EditText nameEditor = (EditText) findViewById(R.id.name_editor);
+        String name = nameEditor.getText().toString();
+
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(UserInfo.COLUMN_NAME_PND_ID, id);
+        insertValues.put(UserInfo.COLUMN_NAME_NAME, name);
+        InsertDBModel model = new InsertDBModel(insertValues, UserInfo.TABLE_NAME);
+
+        UserInfoSQLiteHelper helper = new UserInfoSQLiteHelper(context);
+        DBInsertAsyncTask task = new DBInsertAsyncTask(model, helper, context);
+        task.execute(model);
+    }
+
+    public void idUpdateButtonClicked(View view) {
+        Context context = getApplicationContext();
+        EditText idEditor = (EditText) findViewById(R.id.id_editor);
+        String id = idEditor.getText().toString();
+        EditText nameEditor = (EditText) findViewById(R.id.name_editor);
+        String name = nameEditor.getText().toString();
+
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(UserInfo.COLUMN_NAME_PND_ID, id);
+        insertValues.put(UserInfo.COLUMN_NAME_NAME, name);
+        InsertDBModel model = new InsertDBModel(insertValues, UserInfo.TABLE_NAME);
+
+        UserInfoSQLiteHelper helper = new UserInfoSQLiteHelper(context);
+        DBInsertAsyncTask task = new DBInsertAsyncTask(model, helper, context);
+        task.execute(model);
+    }
+
+
+    private void initialize() {
+        // check whether user has registered before.
+        boolean registered = checkUserRegistration();
+        // enable/disable buttons accordingly.
+        findViewById(R.id.info_update_button).setEnabled(registered);
+        findViewById(R.id.info_save_button).setEnabled(!registered);
+    }
+
+    private boolean checkUserRegistration() {
+
+        return false;
     }
 }

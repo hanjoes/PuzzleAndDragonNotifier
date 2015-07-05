@@ -1,4 +1,4 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,18 +9,42 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity">
 
-    <EditText
-        android:id="@id/id_editor"
-        android:layout_centerInParent="true"
-        android:hint="@string/id_editor_hint"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
-    <Button
-        android:id="@id/id_save_button"
-        android:layout_width="wrap_content"
+        android:layout_weight="4"
+        android:orientation="vertical">
+        <EditText
+            android:id="@id/id_editor"
+            android:hint="@string/id_editor_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@id/name_editor"
+            android:hint="@string/name_editor_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/id_editor"
-        android:layout_centerHorizontal="true"
-        android:text="@string/id_save_button_text"/>
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <Button
+            android:id="@id/info_save_button"
+            android:text="@string/info_button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="idSaveButtonClicked"/>
+        <Button
+            android:id="@id/info_update_button"
+            android:text="@string/info_button_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="idUpdateButtonClicked"/>
+    </LinearLayout>
 
-</RelativeLayout>
+
+
+
+</LinearLayout>

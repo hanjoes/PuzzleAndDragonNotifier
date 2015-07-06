@@ -15,8 +15,7 @@ public class UserInfoSQLiteHelper extends SQLiteOpenHelper {
                     UserInfo._ID + " INTEGER PRIMARY KEY," +
                     UserInfo.COLUMN_NAME_PND_ID + TEXT_TYPE + COMMA_SEP +
                     UserInfo.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
-                    UserInfo.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
-                    " )";
+                    UserInfo.COLUMN_NAME_DATE + TEXT_TYPE + ")";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + UserInfo.TABLE_NAME;

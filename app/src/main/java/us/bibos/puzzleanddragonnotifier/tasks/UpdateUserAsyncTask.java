@@ -5,9 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.DBModel;
+import us.bibos.puzzleanddragonnotifier.DBContract.Model.UpdateDBModel;
 
-public class UpdateUserAsyncTask extends DBAsyncTask<Integer> {
-    public UpdateUserAsyncTask(DBModel<Integer> model, SQLiteOpenHelper helper, Context context) {
+public class UpdateUserAsyncTask extends DBAsyncTask<Integer, String> {
+    public UpdateUserAsyncTask(UpdateDBModel model, SQLiteOpenHelper helper, Context context) {
         super(model, helper, context);
     }
 

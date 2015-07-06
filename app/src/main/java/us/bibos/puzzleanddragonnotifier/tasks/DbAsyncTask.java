@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.DBModel;
 
-public abstract class DBAsyncTask<T> extends AsyncTask<DBModel<T>, Void, String> {
-    protected DBModel<T> model;
+public abstract class DBAsyncTask<M, R> extends AsyncTask<DBModel<M>, Void, R> {
+    protected DBModel<M> model;
     protected SQLiteOpenHelper helper;
     protected Context context;
 
-    public DBAsyncTask(DBModel<T> model, SQLiteOpenHelper helper, Context context) {
+    public DBAsyncTask(DBModel<M> model, SQLiteOpenHelper helper, Context context) {
         this.model = model;
         this.helper = helper;
         this.context = context;
@@ -24,7 +24,7 @@ public abstract class DBAsyncTask<T> extends AsyncTask<DBModel<T>, Void, String>
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+    protected void onPostExecute(R result) {
+        Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,9 +3,7 @@ package us.bibos.puzzleanddragonnotifier.DBContract.Model;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
-import us.bibos.puzzleanddragonnotifier.DBContract.Exceptions.DatabaseException;
-
-public class InsertDBModel extends DBModel {
+public class InsertDBModel extends DBModel<Long> {
 
     private ContentValues values;
     private String tableName;
@@ -16,9 +14,8 @@ public class InsertDBModel extends DBModel {
     }
 
     @Override
-    public void execute(SQLiteDatabase db) {
-        if (db.insert(tableName, null, values) == -1) {
-            throw new DatabaseException("Error occurred when inserting in to table " + tableName);
-        }
+    public Long execute(SQLiteDatabase db) {
+        Long ret = db.insert(tableName, null, values);
+        return ret;
     }
 }

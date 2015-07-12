@@ -1,8 +1,8 @@
 package us.bibos.puzzleanddragonnotifier;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +17,7 @@ import us.bibos.puzzleanddragonnotifier.Tasks.InitializationAsyncTask;
 import us.bibos.puzzleanddragonnotifier.Tasks.RegistrationAsyncTask;
 import us.bibos.puzzleanddragonnotifier.Tasks.UpdateUserAsyncTask;
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +60,9 @@ public class HomeActivity extends ActionBarActivity {
         InsertDBModel model = new InsertDBModel(insertValues, UserInfo.TABLE_NAME);
 
         UserInfoSQLiteHelper helper = new UserInfoSQLiteHelper(this);
-        RegistrationAsyncTask task = new RegistrationAsyncTask(model, helper, this);
-        task.execute(model);
+        RegistrationAsyncTask task = new RegistrationAsyncTask(model,
+                helper.getWritableDatabase(), this);
+        task.execute();
     }
 
     public void idUpdateButtonClicked(View view) {
@@ -76,17 +77,18 @@ public class HomeActivity extends ActionBarActivity {
         UpdateDBModel model = new UpdateDBModel(UserInfo.TABLE_NAME, updateValue, null, null);
 
         UserInfoSQLiteHelper helper = new UserInfoSQLiteHelper(this);
-        UpdateUserAsyncTask task = new UpdateUserAsyncTask(model, helper, this);
-        task.execute(model);
+        UpdateUserAsyncTask task = new UpdateUserAsyncTask(model,
+                helper.getWritableDatabase(), this);
+        task.execute();
     }
-
 
     private void initialize() {
         QueryDBModel model = new QueryDBModel(UserInfo.TABLE_NAME, null, null, null,
                 null, null, null, null);
         UserInfoSQLiteHelper helper = new UserInfoSQLiteHelper(this);
-        InitializationAsyncTask asyncTask = new InitializationAsyncTask(model, helper, this);
-        asyncTask.execute(model);
+        InitializationAsyncTask asyncTask = new InitializationAsyncTask(model,
+                helper.getReadableDatabase(), this);
+        asyncTask.execute();
     }
 
 }

@@ -3,19 +3,17 @@ package us.bibos.puzzleanddragonnotifier.Tasks;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Button;
 import android.widget.EditText;
 
-import us.bibos.puzzleanddragonnotifier.DBContract.Model.DBModel;
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.QueryDBModel;
 import us.bibos.puzzleanddragonnotifier.DBContract.UserInfoContract.UserInfo;
 import us.bibos.puzzleanddragonnotifier.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 
 public class InitializationAsyncTask extends DBAsyncTask<Cursor, Cursor> {
-    public InitializationAsyncTask(QueryDBModel model, SQLiteOpenHelper helper, Context context) {
-        super(model, helper, context);
+    public InitializationAsyncTask(QueryDBModel model, SQLiteDatabase db, Context context) {
+        super(model, db, context);
     }
 
     @Override
@@ -39,12 +37,13 @@ public class InitializationAsyncTask extends DBAsyncTask<Cursor, Cursor> {
         updateButton.setEnabled(needsUpdate);
         Button saveButton = (Button) activity.findViewById(R.id.info_save_button);
         saveButton.setEnabled(!needsUpdate);
+
+        db.close();
     }
 
     @Override
-    protected Cursor doInBackground(DBModel<Cursor>... params) {
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = model.execute(db);
+    protected Cursor doInBackground(Void... ignored) {
+        Cursor cursor = model.execute(this.db);
         return cursor;
     }
 }

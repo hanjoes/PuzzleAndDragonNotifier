@@ -1,16 +1,16 @@
-package us.bibos.puzzleanddragonnotifier.IntegrationTest;
+package us.bibos.puzzleanddragonnotifier.UITests;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
 import us.bibos.puzzleanddragonnotifier.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 
-public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActivity> {
-    public HomeActivityTest() {
+public class HomeActivityLayoutTest extends ActivityInstrumentationTestCase2<HomeActivity> {
+    public HomeActivityLayoutTest() {
         super(HomeActivity.class);
     }
 
@@ -27,15 +27,29 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
         saveButton = (Button) homeActivity.findViewById(R.id.info_save_button);
     }
 
+    @MediumTest
     public void testPreconditions() throws Exception {
         assertNotNull("HomeActivity is null", homeActivity);
         assertNotNull("Update button is null", updateButton);
         assertNotNull("Save button is null", saveButton);
     }
 
+    @MediumTest
     public void testUpdateButton_layout() {
         final ViewGroup.LayoutParams buttonLayout = updateButton.getLayoutParams();
-        assertEquals(LayoutParams.MATCH_PARENT, buttonLayout.height);
-        assertEquals(LayoutParams.WRAP_CONTENT, buttonLayout.width);
+        assertEquals(LayoutParams.WRAP_CONTENT, buttonLayout.height);
+        assertEquals(LayoutParams.MATCH_PARENT, buttonLayout.width);
+    }
+
+    @MediumTest
+    public void testSaveButton_layout() {
+        final ViewGroup.LayoutParams buttonLayout = saveButton.getLayoutParams();
+        assertEquals(LayoutParams.WRAP_CONTENT, buttonLayout.height);
+        assertEquals(LayoutParams.MATCH_PARENT, buttonLayout.width);
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
     }
 }

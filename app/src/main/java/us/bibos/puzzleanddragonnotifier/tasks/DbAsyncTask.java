@@ -1,20 +1,20 @@
 package us.bibos.puzzleanddragonnotifier.Tasks;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.DBModel;
 
-public abstract class DBAsyncTask<M, R> extends AsyncTask<DBModel<M>, Void, R> {
+public abstract class DBAsyncTask<M, R> extends AsyncTask<Void, Void, R> {
     protected DBModel<M> model;
-    protected SQLiteOpenHelper helper;
+    protected SQLiteDatabase db;
     protected Context context;
 
-    public DBAsyncTask(DBModel<M> model, SQLiteOpenHelper helper, Context context) {
+    public DBAsyncTask(DBModel<M> model, SQLiteDatabase db, Context context) {
         this.model = model;
-        this.helper = helper;
+        this.db = db;
         this.context = context;
     }
 

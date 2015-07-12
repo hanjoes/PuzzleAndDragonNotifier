@@ -3,8 +3,6 @@ package us.bibos.puzzleanddragonnotifier.DBContract.Model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
-
 public class QueryDBModel extends DBModel<Cursor> {
     private String table;
     private String[] columns;

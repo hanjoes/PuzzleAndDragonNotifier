@@ -13,6 +13,7 @@ import us.bibos.puzzleanddragonnotifier.DBContract.Model.QueryDBModel;
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.UpdateDBModel;
 import us.bibos.puzzleanddragonnotifier.DBContract.UserInfoContract.UserInfo;
 import us.bibos.puzzleanddragonnotifier.DBHelper.UserInfoSQLiteHelper;
+import us.bibos.puzzleanddragonnotifier.Notifier.SimpleTextNotifier;
 import us.bibos.puzzleanddragonnotifier.Tasks.InitializationAsyncTask;
 import us.bibos.puzzleanddragonnotifier.Tasks.RegistrationAsyncTask;
 import us.bibos.puzzleanddragonnotifier.Tasks.UpdateUserAsyncTask;
@@ -66,6 +67,8 @@ public class HomeActivity extends Activity {
     }
 
     public void idUpdateButtonClicked(View view) {
+        SimpleTextNotifier notifier = new SimpleTextNotifier("Title", "Text", this);
+        notifier.init_notification();
         EditText idEditor = (EditText) findViewById(R.id.id_editor);
         String id = idEditor.getText().toString();
         EditText nameEditor = (EditText) findViewById(R.id.name_editor);

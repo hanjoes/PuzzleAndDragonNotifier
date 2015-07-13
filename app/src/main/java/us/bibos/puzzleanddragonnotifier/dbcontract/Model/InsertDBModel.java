@@ -15,7 +15,6 @@ public class InsertDBModel extends DBModel<Long> {
 
     @Override
     public Long execute(SQLiteDatabase db) {
-        Long ret = db.insert(tableName, null, values);
-        return ret;
+        return db.insert(tableName, null, values);
     }
 }

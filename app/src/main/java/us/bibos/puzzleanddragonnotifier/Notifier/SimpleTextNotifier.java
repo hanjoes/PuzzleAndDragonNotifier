@@ -1,6 +1,5 @@
 package us.bibos.puzzleanddragonnotifier.Notifier;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
@@ -13,13 +12,13 @@ public class SimpleTextNotifier extends Notifier implements doNotify {
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
 
-    public SimpleTextNotifier(String title, String text, Activity activity) {
-        builder = new NotificationCompat.Builder(activity)
+    public SimpleTextNotifier(String title, String text, Context context) {
+        builder = new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(text);
         notificationManager =
-                (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     @Override

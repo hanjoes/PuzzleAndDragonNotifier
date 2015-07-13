@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.QueryDBModel;
 import us.bibos.puzzleanddragonnotifier.DBContract.UserInfoContract.UserInfo;
-import us.bibos.puzzleanddragonnotifier.HomeActivity;
+import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 
 public class InitializationAsyncTask extends DBAsyncTask<Cursor, Cursor> {

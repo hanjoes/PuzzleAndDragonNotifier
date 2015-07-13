@@ -6,9 +6,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.concurrent.TimeUnit;
-
-import us.bibos.puzzleanddragonnotifier.HomeActivity;
+import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.MockContext;
 import us.bibos.puzzleanddragonnotifier.R;
 

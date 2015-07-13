@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
-import us.bibos.puzzleanddragonnotifier.HomeActivity;
+import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 
 public class HomeActivityLayoutTest extends ActivityInstrumentationTestCase2<HomeActivity> {

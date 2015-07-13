@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.InsertDBModel;
-import us.bibos.puzzleanddragonnotifier.HomeActivity;
+import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 
 public class RegistrationAsyncTask extends DBAsyncTask<Long, Boolean> {

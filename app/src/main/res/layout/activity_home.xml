@@ -24,6 +24,12 @@
             android:hint="@string/name_editor_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <Button
+            android:id="@id/start_service_button"
+            android:text="@string/action_button_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="idStartServiceButtonClicked"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
@@ -43,8 +49,6 @@
             android:layout_height="wrap_content"
             android:onClick="idUpdateButtonClicked"/>
     </LinearLayout>
-
-
 
 
 </LinearLayout>

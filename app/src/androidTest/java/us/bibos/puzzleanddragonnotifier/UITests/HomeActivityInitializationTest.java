@@ -9,7 +9,7 @@ import android.widget.Button;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import us.bibos.puzzleanddragonnotifier.HomeActivity;
+import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.MockContext;
 import us.bibos.puzzleanddragonnotifier.R;
 

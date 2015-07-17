@@ -18,17 +18,10 @@ public class PageProbingService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.i(APP_TAG, "Handling Request");
-        while (true) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        Log.i(APP_TAG, "Handling Request...");
 
-            Date today = new Date();
-            SimpleTextNotifier notifier = new SimpleTextNotifier("From background", today.toString(), this);
-            notifier.init_notification();
-        }
+        Date today = new Date();
+        SimpleTextNotifier notifier = new SimpleTextNotifier("From background", today.toString(), this);
+        notifier.init_notification();
     }
 }

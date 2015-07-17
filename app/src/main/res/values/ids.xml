@@ -5,5 +5,5 @@
     <item name="name_editor" type="id" />
     <item name="name_save_button" type="id" />
     <item name="info_update_button" type="id" />
-    <item name="start_service_button" type="id" />
+    <item name="alarm_control_button" type="id" />
 </resources>

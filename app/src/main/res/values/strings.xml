@@ -6,5 +6,6 @@
     <string name="info_button_save">Save</string>
     <string name="info_button_update">Update</string>
     <string name="name_editor_hint">Peter</string>
-    <string name="action_button_start">Lets Hunt!</string>
+    <string name="alarm_control_button_hunt">Lets Hunt!</string>
+    <string name="alarm_control_button_stop">Stop Hunting</string>
 </resources>

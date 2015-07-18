@@ -1,12 +1,16 @@
 package us.bibos.puzzleanddragonnotifier.Activities;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import us.bibos.puzzleanddragonnotifier.DBContract.Model.InsertDBModel;
@@ -22,7 +26,9 @@ import us.bibos.puzzleanddragonnotifier.Tasks.UpdateUserAsyncTask;
 
 public class HomeActivity extends Activity {
 
+    private static final long INTERVAL_ONE_MINUTE = 10 * 1000;
     private UserInfoSQLiteHelper helper;
+    private boolean alarmSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +91,31 @@ public class HomeActivity extends Activity {
         task.execute();
     }
 
-    public void idStartServiceButtonClicked(View view) {
-        Intent startServiceIntent = new Intent(this, PageProbingService.class);
-        startService(startServiceIntent);
+    public void alarmControlButtonClicked(View view) {
+        AlarmManager alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, PageProbingService.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, intent, 0);
+        if (!alarmSet) {
+            alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    INTERVAL_ONE_MINUTE, INTERVAL_ONE_MINUTE, alarmIntent);
+            startHunting();
+        }
+        else {
+            alarmMgr.cancel(alarmIntent);
+            stopHunting();
+        }
+    }
+
+    private void startHunting() {
+        alarmSet = true;
+        Button button = (Button) findViewById(R.id.alarm_control_button);
+        button.setText(R.string.alarm_control_button_stop);
+    }
+
+    private void stopHunting() {
+        alarmSet = false;
+        Button button = (Button) findViewById(R.id.alarm_control_button);
+        button.setText(R.string.alarm_control_button_hunt);
     }
 
     private void initialize() {
@@ -97,6 +125,20 @@ public class HomeActivity extends Activity {
         InitializationAsyncTask asyncTask = new InitializationAsyncTask(model,
                 helper.getReadableDatabase(), this);
         asyncTask.execute();
+
+        boolean alarmSet = isAlarmSet();
+        if (alarmSet) {
+            Button alarmControlButton = (Button) findViewById(R.id.alarm_control_button);
+            alarmControlButton.setText(R.string.alarm_control_button_stop);
+        }
+    }
+
+    private boolean isAlarmSet() {
+        Intent probingServiceIntent = new Intent(this, PageProbingService.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0,
+                probingServiceIntent, PendingIntent.FLAG_NO_CREATE);
+        alarmSet = (alarmIntent != null);
+        return alarmSet;
     }
 
 }

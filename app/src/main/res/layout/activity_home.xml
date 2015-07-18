@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@id/alarm_control_button"
-            android:text="@string/action_button_start"
+            android:text="@string/alarm_control_button_hunt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="alarmControlButtonClicked"/>

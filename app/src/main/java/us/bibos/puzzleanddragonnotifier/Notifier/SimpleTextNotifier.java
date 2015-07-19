@@ -23,7 +23,6 @@ public class SimpleTextNotifier extends Notifier implements doNotify {
 
     @Override
     public void init_notification() {
-        Log.i(Constants.APP_TAG, "Sending Notification....");
         notificationManager.notify(SIMPLE_NOTIFIER, builder.build());
     }
 }

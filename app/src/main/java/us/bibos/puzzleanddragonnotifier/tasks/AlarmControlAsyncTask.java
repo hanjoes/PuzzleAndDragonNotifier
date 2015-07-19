@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import us.bibos.puzzleanddragonnotifier.DBContract.UserInfoContract.UserInfo;
 import us.bibos.puzzleanddragonnotifier.R;
 import us.bibos.puzzleanddragonnotifier.Services.PageProbingService;
 
-import static us.bibos.puzzleanddragonnotifier.Utils.Constants.APP_TAG;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.PND_ID_EXTRA;
 
 public class AlarmControlAsyncTask extends DBAsyncTask<Cursor, Cursor> {
@@ -39,7 +37,7 @@ public class AlarmControlAsyncTask extends DBAsyncTask<Cursor, Cursor> {
             PendingIntent alarmIntent = PendingIntent.getService(context, 0, intent,
                     PendingIntent.FLAG_NO_CREATE);
             boolean alarmStarted = (alarmIntent != null);
-            
+
             // re-acquire the alarm
             alarmIntent = PendingIntent.getService(context, 0, intent, 0);
 

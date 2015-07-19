@@ -8,25 +8,22 @@ import android.util.Log;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import us.bibos.puzzleanddragonnotifier.Notifier.SimpleTextNotifier;
 import us.bibos.puzzleanddragonnotifier.Probe.PNDWikiProbe.NotificationProbeData;
 import us.bibos.puzzleanddragonnotifier.Probe.ProbeData.ProbeData;
 import us.bibos.puzzleanddragonnotifier.Utils.Constants;
+import us.bibos.puzzleanddragonnotifier.Utils.DateTimeUtil;
 
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.APP_TAG;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.ONE_HOUR;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.PND_ID_EXTRA;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.WIKI_TIMETABLE_TIMEZONE;
+import static us.bibos.puzzleanddragonnotifier.Utils.DateTimeUtil.getDateFromChineseMonthDay;
+import static us.bibos.puzzleanddragonnotifier.Utils.DateTimeUtil.getZonedYear;
 
 public class NotificationHandler implements ProbeHandler {
 
@@ -52,7 +49,7 @@ public class NotificationHandler implements ProbeHandler {
         for (Element row : rows) {
             Elements ths = row.getElementsByTag("th");
             if (ths.size() == 1) {//potentially a date header
-                dateStr = getDateFromHeader(ths);
+                dateStr = getDateStringFromHeader(ths);
             }
             else {
                 Elements tds = row.getElementsByTag("td");
@@ -61,7 +58,8 @@ public class NotificationHandler implements ProbeHandler {
                     for (int i = 0; i < tds.size(); ++i) {
                         if (i == columnNum) {
                             timeStr = tds.get(i).text();
-                            dealWithTimeInfo(dateStr + " " + timeStr + " " + getYear());
+                            processDateTimeInfo(dateStr + " " + timeStr + " " +
+                                    getZonedYear(WIKI_TIMETABLE_TIMEZONE));
                         }
                     }
                 }
@@ -69,41 +67,31 @@ public class NotificationHandler implements ProbeHandler {
         }
     }
 
-    private String getYear() {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTimeZone(TimeZone.getTimeZone(WIKI_TIMETABLE_TIMEZONE));
-        return String.valueOf(calendar.get(Calendar.YEAR));
-    }
-
     @Nullable
-    private String getDateFromHeader(Elements ths) {
+    private String getDateStringFromHeader(Elements ths) {
         Element th = ths.get(0);
         String dateStr = th.text();
         boolean match = Pattern.matches("[0-9]+月[0-9]+日", dateStr);
         if (match) {
-            int monthEndIndex = dateStr.indexOf("月");
-            String month = dateStr.substring(0, monthEndIndex);
-            int dayEndIndex = dateStr.indexOf("日");
-            String day = dateStr.substring(monthEndIndex + 1, dayEndIndex);
-            return month + day;
+            return getDateFromChineseMonthDay(dateStr);
         }
         return null;
     }
 
-    private void dealWithTimeInfo(String time) {
-        DateFormat format = new SimpleDateFormat("MMdd HH:mm yyyy", Locale.US);
-        format.setTimeZone(TimeZone.getTimeZone(WIKI_TIMETABLE_TIMEZONE));
+    private void processDateTimeInfo(String dateStr) {
         try {
-            Date remoteDate = format.parse(time);
-            Date localDate = new Date();
-            if (remoteDate.getTime() - localDate.getTime() < ONE_HOUR) {
+            Date remoteDate = DateTimeUtil.getRemoteZonedDateTime(dateStr,
+                    WIKI_TIMETABLE_TIMEZONE);
+            Date systemDate = new Date();
+            Log.v(APP_TAG, "remote date: " + remoteDate + " time: " + remoteDate.getTime());
+            Log.v(APP_TAG, "system date: " + systemDate + " time: " + systemDate.getTime());
+            if (systemDate.getTime() - remoteDate.getTime() < ONE_HOUR) {
                 SimpleTextNotifier notifier = new SimpleTextNotifier("Hunt time!!",
                         "Emergency Happening!", context);
                 notifier.init_notification();
             }
-            Log.i(APP_TAG, "Got date: " + remoteDate);
         } catch (ParseException e) {
-            Log.e(APP_TAG, "Parse error: " + time);
+            Log.e(APP_TAG, "Parse date string error: " + dateStr);
         }
     }
 

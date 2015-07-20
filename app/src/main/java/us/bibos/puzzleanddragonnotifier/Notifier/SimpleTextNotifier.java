@@ -1,22 +1,30 @@
 package us.bibos.puzzleanddragonnotifier.Notifier;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import us.bibos.puzzleanddragonnotifier.R;
-import us.bibos.puzzleanddragonnotifier.Utils.Constants;
 
 public class SimpleTextNotifier extends Notifier implements doNotify {
+    public static final int ONE_SEC = 1000;
+    public static final int ONE_THIRD_SEC = 300;
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
 
     public SimpleTextNotifier(String title, String text, Context context) {
         builder = new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(title)
-                        .setContentText(text);
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setVibrate(new long[]{500, 100, 100, 1000, 1000, 1000, 1000, 1000})
+                .setLights(Color.YELLOW, ONE_SEC, ONE_THIRD_SEC);
+
+        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.golden);
+        builder.setSound(uri);
         notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }

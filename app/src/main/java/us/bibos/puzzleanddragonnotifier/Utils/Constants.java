@@ -7,4 +7,7 @@ public class Constants {
     public static final String WIKI_TIMETABLE_TIMEZONE = "GMT+8:00";
     public static final int NUM_GROUPS = 5;
     public static final int ONE_HOUR = 3600 * 1000;
+    // Date utilities
+    public static final String DEFAULT_PROBING_FORMAT = "MMdd HH:mm yyyy";
+    public static final String DEFAULT_DATE_FORMAT = "MMdd";
 }

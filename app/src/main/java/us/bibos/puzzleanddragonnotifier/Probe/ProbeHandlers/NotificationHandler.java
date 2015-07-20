@@ -1,8 +1,8 @@
 package us.bibos.puzzleanddragonnotifier.Probe.ProbeHandlers;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.jsoup.nodes.Element;
@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
 import us.bibos.puzzleanddragonnotifier.Notifier.SimpleTextNotifier;
 import us.bibos.puzzleanddragonnotifier.Probe.PNDWikiProbe.NotificationProbeData;
 import us.bibos.puzzleanddragonnotifier.Probe.ProbeData.ProbeData;
-import us.bibos.puzzleanddragonnotifier.Utils.Constants;
 import us.bibos.puzzleanddragonnotifier.Utils.DateTimeUtil;
 
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.APP_TAG;
+import static us.bibos.puzzleanddragonnotifier.Utils.Constants.NUM_GROUPS;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.ONE_HOUR;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.PND_ID_EXTRA;
 import static us.bibos.puzzleanddragonnotifier.Utils.Constants.WIKI_TIMETABLE_TIMEZONE;
@@ -44,31 +44,34 @@ public class NotificationHandler implements ProbeHandler {
         Element table = tables.first();
 
         Elements rows = table.getElementsByTag("tr");
-        String timeStr;
-        String dateStr = null;
+        String dateStr = DateTimeUtil.getDefaultDateStr();
+        Log.v(APP_TAG, "Default date string: " + dateStr);
         for (Element row : rows) {
             Elements ths = row.getElementsByTag("th");
             if (ths.size() == 1) {//potentially a date header
-                dateStr = getDateStringFromHeader(ths);
+                dateStr = updateDateStringFromHeader(ths);
+                continue;
             }
-            else {
-                Elements tds = row.getElementsByTag("td");
-                if (tds.size() == Constants.NUM_GROUPS) {
-                    int columnNum = getColumnNumFromPndId();
-                    for (int i = 0; i < tds.size(); ++i) {
-                        if (i == columnNum) {
-                            timeStr = tds.get(i).text();
-                            processDateTimeInfo(dateStr + " " + timeStr + " " +
-                                    getZonedYear(WIKI_TIMETABLE_TIMEZONE));
-                        }
-                    }
-                }
+            Elements tds = row.getElementsByTag("td");
+            if (tds.size() == NUM_GROUPS) {
+                processColumns(dateStr, tds);
             }
         }
     }
 
-    @Nullable
-    private String getDateStringFromHeader(Elements ths) {
+    private void processColumns(String dateStr, Elements tds) {
+        String timeStr;
+        int columnNum = getColumnNumFromPndId();
+        for (int i = 0; i < tds.size(); ++i) {
+            if (i == columnNum) {
+                timeStr = tds.get(i).text();
+                processDateTimeInfo(dateStr + " " + timeStr + " " +
+                        getZonedYear(WIKI_TIMETABLE_TIMEZONE));
+            }
+        }
+    }
+
+    private String updateDateStringFromHeader(Elements ths) {
         Element th = ths.get(0);
         String dateStr = th.text();
         boolean match = Pattern.matches("[0-9]+月[0-9]+日", dateStr);

@@ -24,6 +24,14 @@
             android:hint="@string/name_editor_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/huntButton"
+            android:text="@string/hunt_button_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="huntButtonClicked"/>
+
         <Button
             android:id="@id/alarm_control_button"
             android:text="@string/alarm_control_button_hunt"

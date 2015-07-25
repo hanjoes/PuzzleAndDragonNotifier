@@ -8,4 +8,8 @@
     <string name="name_editor_hint">Peter</string>
     <string name="alarm_control_button_hunt">Lets Hunt!</string>
     <string name="alarm_control_button_stop">Stop Hunting</string>
+    <string name="hunting_activity">Hunting Center</string>
+    <string name="hunt_button_text">Hunt!</string>
+    <string name="snooze_button_text">Snooze</string>
+    <string name="go_home_button_text">Home</string>
 </resources>

@@ -17,6 +17,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activities.HuntingActivity"
+            android:label="@string/hunting_activity"
+            android:parentActivityName=".Activities.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.HomeActivity"/>
+        </activity>
         <service
             android:name=".Services.PageProbingService"
             android:exported="false"/>

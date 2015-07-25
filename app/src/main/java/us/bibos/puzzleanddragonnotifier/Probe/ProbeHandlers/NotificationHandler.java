@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import us.bibos.puzzleanddragonnotifier.Notifier.HuntingNotifier;
 import us.bibos.puzzleanddragonnotifier.Notifier.SimpleTextNotifier;
 import us.bibos.puzzleanddragonnotifier.Probe.PNDWikiProbe.NotificationProbeData;
 import us.bibos.puzzleanddragonnotifier.Probe.ProbeData.ProbeData;
@@ -82,13 +83,15 @@ public class NotificationHandler implements ProbeHandler {
     }
 
     private void processDateTimeInfo(String dateStr) {
+        HuntingNotifier huntingNotifier = new HuntingNotifier("Test!!",
+                "Testing...", context);
+        huntingNotifier.init_notification();
         try {
             Date remoteDate = DateTimeUtil.getRemoteZonedDateTime(dateStr,
                     WIKI_TIMETABLE_TIMEZONE);
             Date systemDate = new Date();
-            Log.v(APP_TAG, "remote date: " + remoteDate + " time: " + remoteDate.getTime());
-            Log.v(APP_TAG, "system date: " + systemDate + " time: " + systemDate.getTime());
-            if (systemDate.getTime() - remoteDate.getTime() < ONE_HOUR) {
+            long difference = systemDate.getTime() - remoteDate.getTime();
+            if (difference > 0 && difference < ONE_HOUR) {
                 SimpleTextNotifier notifier = new SimpleTextNotifier("Hunt time!!",
                         "Emergency Happening!", context);
                 notifier.init_notification();

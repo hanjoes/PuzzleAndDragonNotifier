@@ -2,6 +2,7 @@ package us.bibos.puzzleanddragonnotifier.Activities;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -100,6 +101,11 @@ public class HomeActivity extends Activity {
         InitializationAsyncTask asyncTask = new InitializationAsyncTask(model,
                 helper.getReadableDatabase(), this);
         asyncTask.execute();
+    }
+
+    public void huntButtonClicked(View view) {
+        Intent huntIntent = new Intent(this, HuntingActivity.class);
+        startActivity(huntIntent);
     }
 
 }

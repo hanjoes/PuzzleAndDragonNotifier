@@ -1,6 +1,5 @@
 package us.bibos.puzzleanddragonnotifier.Notifier;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Color;
@@ -9,9 +8,7 @@ import android.support.v4.app.NotificationCompat;
 
 import us.bibos.puzzleanddragonnotifier.R;
 
-public class SimpleTextNotifier extends Notifier implements doNotify {
-    public static final int ONE_SEC = 1000;
-    public static final int ONE_THIRD_SEC = 300;
+public class SimpleTextNotifier extends Notifier {
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="us.bibos.puzzleanddragonnotifier" >
+    package="us.bibos.notifier" >
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activities.HomeActivity"
+            android:name="us.bibos.notifier.Activities.HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,15 +18,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.HuntingActivity"
+            android:name="us.bibos.notifier.Activities.HuntingActivity"
             android:label="@string/hunting_activity"
-            android:parentActivityName=".Activities.HomeActivity">
+            android:parentActivityName="us.bibos.notifier.Activities.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.HomeActivity"/>
+                android:value="us.bibos.notifier.Activities.HomeActivity"/>
         </activity>
         <service
-            android:name=".Services.PageProbingService"
+            android:name="us.bibos.notifier.Services.PageProbingService"
             android:exported="false"/>
     </application>
 

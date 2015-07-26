@@ -25,12 +25,12 @@
             android:layout_gravity="center_horizontal"
             android:onClick="huntButtonClicked"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/snooze_button_text"
-            android:id="@+id/snoozeButton"
-            android:layout_gravity="center_horizontal"/>
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/snooze_button_text"-->
+            <!--android:id="@+id/snoozeButton"-->
+            <!--android:layout_gravity="center_horizontal"/>-->
 
     </LinearLayout>
 

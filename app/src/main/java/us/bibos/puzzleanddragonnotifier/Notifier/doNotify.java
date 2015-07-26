@@ -1,5 +1,5 @@
 package us.bibos.puzzleanddragonnotifier.Notifier;
 
-public interface doNotify {
+public interface DoNotify {
     public void init_notification();
 }

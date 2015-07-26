@@ -1,6 +1,6 @@
 package us.bibos.puzzleanddragonnotifier.Notifier;
 
-abstract public class Notifier implements doNotify {
+abstract public class Notifier implements DoNotify {
     public static final int ONE_SEC = 1000;
     public static final int ONE_THIRD_SEC = 300;
 

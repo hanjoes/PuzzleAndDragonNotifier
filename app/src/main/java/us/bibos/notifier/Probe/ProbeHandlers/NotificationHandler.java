@@ -45,7 +45,7 @@ public class NotificationHandler implements ProbeHandler {
 
         Elements rows = table.getElementsByTag("tr");
         String dateStr = DateTimeUtil.getDefaultDateStr();
-        Log.v(APP_TAG, "Default date string: " + dateStr);
+//        Log.v(APP_TAG, "Default date string: " + dateStr);
         for (Element row : rows) {
             Elements ths = row.getElementsByTag("th");
             if (ths.size() == 1) {//potentially a date header

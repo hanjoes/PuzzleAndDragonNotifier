@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:text="@string/hunt_button_text"
             android:id="@+id/huntButton"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:onClick="huntButtonClicked"/>
 
         <Button
             android:layout_width="match_parent"

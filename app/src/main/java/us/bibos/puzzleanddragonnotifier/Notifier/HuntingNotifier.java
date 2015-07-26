@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
-import us.bibos.puzzleanddragonnotifier.Activities.HomeActivity;
 import us.bibos.puzzleanddragonnotifier.Activities.HuntingActivity;
 import us.bibos.puzzleanddragonnotifier.R;
 

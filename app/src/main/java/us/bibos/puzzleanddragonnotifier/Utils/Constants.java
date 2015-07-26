@@ -10,4 +10,6 @@ public class Constants {
     // Date utilities
     public static final String DEFAULT_PROBING_FORMAT = "MMdd HH:mm yyyy";
     public static final String DEFAULT_DATE_FORMAT = "MMdd";
+    // Package name for Puzzle and Dragon (might not be safe)
+    public static final String PAD_PACKAGE_NAME = "jp.gungho.pad";
 }
